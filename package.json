@@ -1,0 +1,11 @@
+{
+  "name": "rest-api-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Shaban",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1"
+  }
+}
