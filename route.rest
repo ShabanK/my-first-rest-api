@@ -1,2 +1,7 @@
-GET http://localhost:3000/subs/5dfe7959b8fe991810d7169f
+PATCH http://localhost:3000/subs/5dfe8631f0ace3251449e067
+Content-Type: application/json
 
+{
+    "name": "Dude",
+    "subbedTo": "WebDevComplicated"
+}

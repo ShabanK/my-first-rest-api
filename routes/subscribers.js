@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
 //get one
 router.get("/:id", getSub, (req, res) => {
   console.log("ONE ", req.params.id, res);
-  res.send(res.subscriber);
+  res.json(res.subscriber);
 });
 
 //create one
@@ -54,13 +54,31 @@ router.post("/", async (req, res) => {
 });
 
 //update one
-router.patch("/:id", (req, res) => {
-  console.log("Patch ", req.params.id);
+router.patch("/:id", getSub, async (req, res) => {
+  // console.log("Patch ", req.params.id);
+  if (req.body.name != null) {
+    res.subscriber.name = req.body.name;
+  }
+  if (req.body.subbedTo != null) {
+    res.subscriber.subbedTo = req.body.subbedTo;
+  }
+  try {
+    let updatedSub = await res.subscriber.save();
+    res.json(updatedSub);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
 //delete one
-router.delete("/:id", (req, res) => {
-  console.log("Delete ", req.params.id);
+router.delete("/:id", getSub, async (req, res) => {
+  // console.log("Delete ", req.params.id);
+  try {
+    await res.subscriber.remove();
+    res.json({ message: "Sub has been removed" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;
